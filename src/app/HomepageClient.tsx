@@ -71,9 +71,8 @@ const HomepageClient: React.FC<HomepageClientProps> = ({ states }) => {
 					<Image
 						src={"/images/india.jpg"}
 						alt="bg=image"
-						objectFit="cover"
 						fill
-						className="dark:invert dark:mix-blend-screen opacity-[0.2] z-[-1]"
+						className="dark:invert dark:mix-blend-screen opacity-[0.2] z-[-1] object-cover"
 					/>
 				</div>
 				<Chat />
