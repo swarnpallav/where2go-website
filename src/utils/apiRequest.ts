@@ -1,5 +1,7 @@
 const headers = {
 	"Content-Type": "application/json",
+	withCredentials: "true",
+	credentials: "include",
 };
 
 const getRequest = async (url: string, init?: RequestInit) => {
@@ -11,12 +13,13 @@ const getRequest = async (url: string, init?: RequestInit) => {
 
 		const jsonifiedResponse = await response.json();
 
-		return jsonifiedResponse;
+		return [null, jsonifiedResponse];
 	} catch (error) {
 		console.log(
 			`Error occured while fetching data for ${process.env.NEXT_PUBLIC_BACKEND_URL}${url}: `,
 			error
 		);
+		return [error, undefined];
 	}
 };
 
@@ -31,12 +34,13 @@ const postRequest = async (url: string, payload?: Record<string, any>, init?: Re
 
 		const jsonifiedResponse = await response.json();
 
-		return jsonifiedResponse;
+		return [null, jsonifiedResponse];
 	} catch (error) {
 		console.log(
 			`Error occured while fetching data for ${process.env.NEXT_PUBLIC_BACKEND_URL}${url}: `,
 			error
 		);
+		return [error, undefined];
 	}
 };
 

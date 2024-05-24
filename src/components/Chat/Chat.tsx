@@ -7,12 +7,14 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { SendHorizonalIcon } from "lucide-react";
+import { Separator } from "../ui/separator";
+import { Textarea } from "../ui/textarea";
+import Message from "./Message";
 
 const FormSchema = z.object({
-	username: z.string().min(2, {
+	message: z.string().min(2, {
 		message: "message must be at least 2 characters.",
 	}),
 });
@@ -21,7 +23,7 @@ const InputForm = () => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			username: "",
+			message: "",
 		},
 	});
 
@@ -38,21 +40,30 @@ const InputForm = () => {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="flex">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="flex p-3 gap-3 items-end bg-primary-foreground"
+			>
 				<FormField
 					control={form.control}
-					name="username"
+					name="message"
 					render={({ field }) => (
-						<FormItem className="flex-1">
+						<FormItem className="flex-1 flex grow">
 							<FormControl>
-								<Input placeholder="shadcn" {...field} />
+								<Textarea
+									placeholder="Add a message"
+									className="resize-none rounded-full min-h-[40px] max-h-[100px] grow"
+									{...field}
+									rows={1}
+									required
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<Button className="m-0" type="submit">
-					<SendHorizonalIcon />
+				<Button className="m-0 rounded-full w-[40px] h-[40px] p-0" type="submit">
+					<SendHorizonalIcon size={18} />
 				</Button>
 			</form>
 		</Form>
@@ -60,15 +71,34 @@ const InputForm = () => {
 };
 
 const Chat = () => {
+	const messages = [
+		"Heelo",
+		"Hi",
+		"bye bye",
+		"ok bye",
+		"Heelo",
+		"Hi",
+		"bye bye",
+		"ok bye",
+		"Heelo",
+		"Hi",
+		"bye bye",
+		"ok bye",
+		"Heelo",
+		"Hi",
+		"bye bye",
+		"ok bye",
+	];
 	return (
-		<div className="rounded-md border">
-			<ScrollArea className="h-[600px] w-[350px] rounded-md p-4">
-				Jokester began sneaking into the castle in the middle of the night and leaving jokes all
-				over the place: under the pillow, in his soup, even in the royal toilet. The king was
-				furious, but he could not seem to stop Jokester. And then, one day, the people of the
-				kingdom discovered that the jokes left by Jokester were so funny that they could not help
-				but laugh. And once they started laughing, they could not stop.
+		<div className="w-full md:w-[350px] rounded-lg overflow-hidden border max-h-[80vh] flex flex-col bg-primary-foreground">
+			<div className="p-4 text-center font-medium bg-primary-foreground">Chat Globally</div>
+			<Separator />
+			<ScrollArea className="md:w-[350px] rounded-md flex-1">
+				{messages.map((_, i) => (
+					<Message key={i} />
+				))}
 			</ScrollArea>
+			<Separator />
 			<InputForm />
 		</div>
 	);

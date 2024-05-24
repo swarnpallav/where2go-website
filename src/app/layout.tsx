@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 import Header from "@/components/Header";
 import Providers from "./providers";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -23,14 +24,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html lang="en">
 			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
 				<Providers>
-					<main className='flex min-h-screen flex-col'>
+					<main className="flex min-h-screen flex-col">
 						<Header />
 						{children}
 					</main>
 				</Providers>
+				<Toaster />
 			</body>
 		</html>
 	);
