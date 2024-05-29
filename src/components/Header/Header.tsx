@@ -5,7 +5,8 @@ import { Separator } from "../ui/separator";
 import { BellIcon } from "lucide-react";
 import BurgerMenu from "../BurgerMenu";
 import Login from "./Login";
-import Logout from "./Logout";
+import Link from "next/link";
+import Profile from "./Profile";
 
 const Header = () => {
 	return (
@@ -13,19 +14,21 @@ const Header = () => {
 			<div className="flex justify-between md:px-24 items-center">
 				<div className="flex items-center">
 					<BurgerMenu />
-					<Image
-						className="w-16 h-16 mix-blend-exclusion"
-						src={"/images/WH.jpg"}
-						alt="brand-logo"
-						height={84}
-						width={84}
-					/>
+					<Link href={"/"}>
+						<Image
+							className="w-16 h-16 mix-blend-exclusion"
+							src={"/images/WH.jpg"}
+							alt="brand-logo"
+							height={84}
+							width={84}
+						/>
+					</Link>
 				</div>
 				<div className="flex items-center gap-3 p-2 md:p-0">
 					<BellIcon className="cursor-pointer" />
 					<Button className="hidden md:block">contact us</Button>
 					<Login />
-					<Logout />
+					<Profile />
 					<div className="hidden md:block">
 						<ModeToggle />
 					</div>

@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button";
-import {
-	Sheet,
-	SheetContent,
-	SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import ModeToggle from "../ModeToggle";
+import Logout from "../Header/Logout";
 
 const BurgerMenu = () => {
 	return (
@@ -16,7 +13,7 @@ const BurgerMenu = () => {
 			<SheetContent className="flex flex-col" side={"left"}>
 				<ModeToggle />
 				<Button>contact us</Button>
-				<Button>log out</Button>
+				<Logout />
 			</SheetContent>
 		</Sheet>
 	);

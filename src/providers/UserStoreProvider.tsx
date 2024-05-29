@@ -70,7 +70,7 @@ export const UserStoreProvider = ({ children }: UserStoreProviderProps) => {
 
 	return (
 		<UserApiContext.Provider value={apiCtxValue}>
-			<UserStoreContext.Provider value={storeRef.current}>{children}</UserStoreContext.Provider>;
+			<UserStoreContext.Provider value={storeRef.current}>{children}</UserStoreContext.Provider>
 		</UserApiContext.Provider>
 	);
 };

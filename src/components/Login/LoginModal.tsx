@@ -12,12 +12,18 @@ import LoginForm from "./LoginForm";
 
 interface LoginModalProps {
 	closeModal: () => void;
-};
+}
 
 const LoginModal: React.FC<LoginModalProps> = ({ closeModal }) => {
 	const isMobile = useIsMobile();
+
+	const handleOnOpenChange = (isOpen: boolean) => {
+		if (!isOpen) {
+			closeModal();
+		}
+	};
 	return isMobile ? (
-		<Sheet open={true}>
+		<Sheet open={true} onOpenChange={handleOnOpenChange}>
 			<SheetContent className="flex flex-col" side={"bottom"}>
 				<SheetHeader>
 					<SheetTitle>sign in with email and password</SheetTitle>

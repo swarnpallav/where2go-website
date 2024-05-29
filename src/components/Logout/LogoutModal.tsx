@@ -28,6 +28,12 @@ const LogoutModal: React.FC<LogoutModalProps> = ({ closeModal }) => {
 	const isMobile = useIsMobile();
 	const { logout } = useUserApi();
 
+	const handleOnOpenChange = (isOpen: boolean) => {
+		if (!isOpen) {
+			closeModal();
+		}
+	};
+
 	const onLogoutConfirm = async () => {
 		const [error] = await logout();
 
@@ -45,7 +51,7 @@ const LogoutModal: React.FC<LogoutModalProps> = ({ closeModal }) => {
 		closeModal();
 	};
 	return isMobile ? (
-		<Sheet open={true}>
+		<Sheet open={true} onOpenChange={handleOnOpenChange}>
 			<SheetContent className="flex flex-col" side={"bottom"}>
 				<SheetHeader>
 					<SheetTitle>logout</SheetTitle>
@@ -53,16 +59,18 @@ const LogoutModal: React.FC<LogoutModalProps> = ({ closeModal }) => {
 						are you sure you would like to logout of your account?
 					</SheetDescription>
 				</SheetHeader>
-				<SheetFooter>
-					<Button onClick={closeModal} variant={"secondary"}>
+				<SheetFooter className="flex flex-row gap-4">
+					<Button className="w-full" onClick={closeModal} variant={"secondary"}>
 						no
 					</Button>
-					<Button onClick={onLogoutConfirm}>yes</Button>
+					<Button className="w-full" onClick={onLogoutConfirm}>
+						yes
+					</Button>
 				</SheetFooter>
 			</SheetContent>
 		</Sheet>
 	) : (
-		<Dialog open={true}>
+		<Dialog open={true} onOpenChange={handleOnOpenChange}>
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>logout</DialogTitle>
